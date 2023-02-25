@@ -14,7 +14,7 @@ This lab shows you how to:
 
 At the end of this lab, your architecture will look like the following example:
 
-![Architecture](image.jpg)
+
 
 ## Duration
 
@@ -67,7 +67,7 @@ A VPC is a virtual network that is dedicated to your Amazon Web Services (AWS) a
    - For Name tag, enter "Lab VPC".
    - For IPv4 CIDR block, enter "10.0.0.0/16".
 5. Choose Create VPC.
-
+![AWS](https://github.com/Sohaib63/VPC-Lab/blob/main/Screenshot%20(63).png)
 Note: If these options do not appear, cancel your configuration. In the left navigation pane, make sure you that chose Your VPCs. Then, choose Create VPC again.
 
 ## Configuring DNS Hostnames
@@ -82,6 +82,7 @@ This option assigns a friendly Domain Name System (DNS) name to EC2 instances in
 
 Any EC2 instances that are launched into the VPC now automatically receive a DNS hostname. You can also add a more-meaningful DNS name (such as "app.example.com") later by using Amazon Route 53.
 
+![AWS](https://github.com/Sohaib63/VPC-Lab/blob/main/Screenshot%20(64).png)
 # Task 2: Creating subnets
 
 A **subnet** is a subrange of IP addresses in the VPC. AWS resources can be launched into a specified subnet. Use a public subnet for resources that must be connected to the internet, and use a private subnet for resources that must remain isolated from the internet.
@@ -132,7 +133,7 @@ Use what you learned in the previous steps to create another subnet with the fol
 The CIDR block of 10.0.2.0/23 includes all IP addresses that start with 10.0.2.x and 10.0.3.x. This is twice as large as the public subnet because most resources should be kept private unless they specifically must be accessible from the internet.
 
 Your VPC now has two subnets. However, the public subnet is totally isolated and cannot communicate with resources outside the VPC. Next, you configure the public subnet to connect to the internet via an internet gateway.
-
+![AWS](https://github.com/Sohaib63/VPC-Lab/blob/main/Screenshot%20(65).png)
 # Task 3: Creating an internet gateway
 
 An internet gateway is a horizontally scaled, redundant, and highly available VPC component. It allows communication between the instances in a VPC and the internet. It imposes no availability risks or bandwidth constraints on network traffic.
@@ -155,7 +156,7 @@ In this task, you will create an internet gateway so that internet traffic can a
    - For Available VPCs, select **Lab VPC**.
    - Choose **Attach internet gateway**
 5. This action attaches the internet gateway to your Lab VPC. Although you created an internet gateway and attached it to your VPC, you must also configure the public subnet route table so that it uses the internet gateway.
-
+![AWS](https://github.com/Sohaib63/VPC-Lab/blob/main/Screenshot%20(66).png)
 # Task 4: Configuring Route Tables
 
 A route table contains a set of rules, called routes, that are used to determine where network traffic is directed. Each subnet in a VPC must be associated with a route table because the table controls the routing for the subnet. A subnet can be associated with only one route table at a time, but you can associate multiple subnets with the same route table.
@@ -201,7 +202,7 @@ To summarize, you can create a public subnet by following these steps:
 2. Create a route table.
 3. Add a route to the route table that directs 0.0.0.0/0 traffic to the internet gateway.
 4. Associate the route table with a subnet, which then becomes a public subnet.
-
+![AWS](https://github.com/Sohaib63/VPC-Lab/blob/main/Screenshot%20(67).png)
 # Task 5: Creating a security group for the application server
 
 A security group acts as a virtual firewall for instances to control inbound and outbound traffic. Security groups operate at the level of the elastic network interface for the instance. Security groups do not operate at the subnet level. Thus, each instance can have its own firewall that controls traffic. If you do not specify a particular security group at launch time, the instance is automatically assigned to the default security group for the VPC.
@@ -224,7 +225,7 @@ In this task, you create a security group that allows users to access your appli
 8. Choose **Save rules**
 
 You use this `App-SG` in the next task.
-
+![AWS](https://github.com/Sohaib63/VPC-Lab/blob/main/Screenshot%20(68).png)
 # Task 6: Launching an application server in the public subnet
 1. On the Services menu, choose EC2.
 2. Choose Launch instance and then select Launch instance from the dropdown list. Configure the following options:
@@ -268,4 +269,5 @@ You use this `App-SG` in the next task.
 7. Open a new browser tab, paste the IP address you just copied, and press Enter.
     - If you configured the VPC correctly, the Inventory application and this message should appear: Please configure Settings to connect to database. You have not configured any database settings yet, but the appearance of the Inventory application demonstrates that the public subnet was correctly configured.
     - If the Inventory application does not appear, wait for 60 seconds and refresh the page to try again. It can take a couple of minutes for the EC2 instance to boot and run the script that installs the software.
+![AWS](https://github.com/Sohaib63/VPC-Lab/blob/main/Screenshot%20(69).png)
 8. At the top of these instructions, choose Submit to record your progress and when prompted, choose Yes.
