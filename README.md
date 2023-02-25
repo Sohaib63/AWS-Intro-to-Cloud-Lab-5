@@ -81,3 +81,54 @@ This option assigns a friendly Domain Name System (DNS) name to EC2 instances in
 `ec2-52-42-133-255.us-west-2.compute.amazonaws.com`
 
 Any EC2 instances that are launched into the VPC now automatically receive a DNS hostname. You can also add a more-meaningful DNS name (such as "app.example.com") later by using Amazon Route 53.
+
+# Task 2: Creating subnets
+
+A **subnet** is a subrange of IP addresses in the VPC. AWS resources can be launched into a specified subnet. Use a public subnet for resources that must be connected to the internet, and use a private subnet for resources that must remain isolated from the internet.
+
+In this task, you create a public subnet and a private subnet:
+
+## Subnets
+
+### Create a public subnet
+
+You use the public subnet for internet-facing resources.
+
+1. In the left navigation pane, choose **Subnets**.
+2. Choose **Create subnet** and configure the following settings:
+
+   - For VPC ID, choose Lab VPC.
+   - For Subnet name, enter Public Subnet.
+   - For Availability zone, select the first Availability Zone in the list. Do not choose No Preference.
+   - For IPv4 CIDR block, enter 10.0.0.0/24.
+   
+3. Choose **Create subnet**.
+   
+The VPC has a CIDR block of 10.0.0.0/16, which includes all 10.0.x.x IP addresses. The subnet you just created has a CIDR block of 10.0.0.0/24, which includes all 10.0.0.x IP addresses. They might look similar, but the subnet is smaller than the VPC because of the /24 in the CIDR range.
+
+You now configure the subnet to automatically assign a public IP address for all instances that are launched in it.
+
+4. Select the check box for Public Subnet.
+5. Choose **Actions** and select **Edit subnet settings**. Then configure the following option:
+   
+   - Under Auto-assign IP settings, select Enable auto-assign public IPv4 address.
+   
+6. Choose **Save**.
+
+Though this subnet is named Public Subnet, it is not yet public. A public subnet must have an internet gateway, which you attach in the next task.
+
+### Create a private subnet
+
+You use the private subnet for resources that must remain isolated from the internet.
+
+Use what you learned in the previous steps to create another subnet with the following settings:
+
+1. For VPC ID, choose Lab VPC.
+2. For Subnet name, enter Private Subnet.
+3. For Availability Zone, select the first Availability Zone in the list. Do not choose No Preference.
+4. For IPv4 CIDR block, enter 10.0.2.0/23.
+5. Choose **Create subnet**.
+
+The CIDR block of 10.0.2.0/23 includes all IP addresses that start with 10.0.2.x and 10.0.3.x. This is twice as large as the public subnet because most resources should be kept private unless they specifically must be accessible from the internet.
+
+Your VPC now has two subnets. However, the public subnet is totally isolated and cannot communicate with resources outside the VPC. Next, you configure the public subnet to connect to the internet via an internet gateway.
