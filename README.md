@@ -201,3 +201,26 @@ To summarize, you can create a public subnet by following these steps:
 2. Create a route table.
 3. Add a route to the route table that directs 0.0.0.0/0 traffic to the internet gateway.
 4. Associate the route table with a subnet, which then becomes a public subnet.
+
+# Task 5: Creating a security group for the application server
+
+A security group acts as a virtual firewall for instances to control inbound and outbound traffic. Security groups operate at the level of the elastic network interface for the instance. Security groups do not operate at the subnet level. Thus, each instance can have its own firewall that controls traffic. If you do not specify a particular security group at launch time, the instance is automatically assigned to the default security group for the VPC.
+
+In this task, you create a security group that allows users to access your application server via HTTP.
+
+1. In the left navigation pane, choose Security Groups.
+2. Choose **Create security group** and configure the following settings:
+    * For Security group name, enter `App-SG`
+    * For Description, enter `Allow HTTP traffic`
+    * For VPC, choose `Lab VPC`.
+3. Choose **Create security group**
+4. Choose the **Inbound Rules** tab.
+5. The settings for Inbound Rules determine what traffic is permitted to reach the instance. You configure it to permit HTTP (port 80) traffic that comes from anywhere on the internet (0.0.0.0/0).
+6. Choose **Edit inbound rules**
+7. Choose **Add rule** and then configure the following settings:
+    * For Type, choose `HTTP`.
+    * From the Source type dropdown list, choose `Anywhere IPv4`.
+    * For Description, enter `Allow web access`
+8. Choose **Save rules**
+
+You use this `App-SG` in the next task.
