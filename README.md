@@ -51,3 +51,33 @@ Tip: If a new browser tab does not open, a banner or icon at the top of your bro
 6. Arrange the AWS Management Console tab so that it displays along side these instructions. Ideally, you should be able to see both browser tabs at the same time to make it easier to follow the lab steps.
 
 Do not change the Region unless specifically instructed to do so.
+
+# Task 1: Creating a VPC
+
+You begin by using Amazon VPC to create a new VPC.
+
+A VPC is a virtual network that is dedicated to your Amazon Web Services (AWS) account. It is logically isolated from other virtual networks in the AWS Cloud. You can launch AWS resources, such as Amazon Elastic Compute Cloud (Amazon EC2) instances, into the VPC. You can configure the VPC by modifying its IP address range and can create subnets. You can also configure route tables, network gateways, and security settings.
+
+## Creating the VPC
+
+1. In the AWS Management Console, on the Services menu, choose VPC.
+2. In the left navigation pane, choose Your VPCs.
+3. Choose Create VPC.
+4. Configure the following settings:
+   - For Name tag, enter "Lab VPC".
+   - For IPv4 CIDR block, enter "10.0.0.0/16".
+5. Choose Create VPC.
+
+Note: If these options do not appear, cancel your configuration. In the left navigation pane, make sure you that chose Your VPCs. Then, choose Create VPC again.
+
+## Configuring DNS Hostnames
+
+1. From the VPC Details page, choose the Tags tab.
+2. Choose Actions and select Edit DNS hostnames.
+3. Select Enable, and choose Save changes.
+
+This option assigns a friendly Domain Name System (DNS) name to EC2 instances in the VPC, such as the following:
+
+`ec2-52-42-133-255.us-west-2.compute.amazonaws.com`
+
+Any EC2 instances that are launched into the VPC now automatically receive a DNS hostname. You can also add a more-meaningful DNS name (such as "app.example.com") later by using Amazon Route 53.
